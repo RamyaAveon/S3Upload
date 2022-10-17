@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.1231.0",
+    "chalk": "^4.1.2",
+    "dotenv": "^10.0.0",
+    "fs": "^0.0.1-security",
+    "nodemon": "^2.0.20",
+    "serverless": "^3.23.0",
+    "serverless-plugin-common-excludes": "^4.0.0",
+    "serverless-step-functions": "^3.10.0"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "name": "s3upload",
+  "version": "1.0.0",
+  "description": "Upload to S3",
+  "main": "index.js",
+  "author": "Ramya",
+  "license": "ISC"
+}

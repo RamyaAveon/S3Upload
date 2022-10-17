@@ -1,0 +1,52 @@
+service: aws-services
+framework: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: dev
+  region: us-east-1
+
+functions:
+  createSNSTopic:
+    handler: handler.createSNSTopic
+  # createSQSQueue:
+  #   handler: handler.createSQSQueue
+  # pushSNSMessage:
+  #   handler: handler.pushSNSMessage
+  # addSNSSubscription:
+  #   handler: handler.addSNSSubscription
+
+plugins:
+  - serverless-step-functions
+  - serverless-plugin-common-excludes
+
+stepFunctions:
+  stateMachines:
+    ex17102022:
+      name: ex17102022
+      definition:
+        Comment: 'My exercise on SNS,SQS'
+        StartAt: CreateSNSTopic
+        States:
+          CreateSNSTopic:
+            Type: Task
+            Resource: arn:aws:lambda:us-east-1:344185303296:function:aws-services-dev-createSNSTopic
+            ResultPath: "$.topicARN"
+            End: true
+          #   Next: CreateSQSQueue
+          # CreateSQSQueue:
+          #   Type: Task
+          #   Resource: arn:aws:lambda:us-east-1:344185303296:function:aws-services-dev-createSQSQueue
+          #   ResultPath: "$.queue"
+          #   Next: AddSubscription        
+          # AddSubscription:
+          #   Type: Task
+          #   Resource: arn:aws:lambda:us-east-1:344185303296:function:aws-services-dev-addSNSSubscription
+          #   InputPath: "$"
+          #   End: true
+#  {
+#      "SNSTopicName": "mySNSTopic",
+   	# "SQSQueueName":"mySQS",
+#    "message":"my msg"
+#  }
